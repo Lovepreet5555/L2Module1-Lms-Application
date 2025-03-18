@@ -14,7 +14,7 @@ const AdminRemoveBook = () => {
     setError("");    // Clear previous error
 
     try {
-      const response = await fetch(`http://localhost:8080/api/book/${isbn}`, {
+      const response = await fetch(`/api/book/remove/${isbn}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

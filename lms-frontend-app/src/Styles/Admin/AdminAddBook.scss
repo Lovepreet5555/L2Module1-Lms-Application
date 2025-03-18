@@ -3,7 +3,6 @@
     justify-content: center; // Center horizontally
     align-items: flex-start; // Align content at the top to avoid being centered
     min-height: 100vh; // Full viewport height to ensure the form takes up full height
-    background-color: #f1f1f1; // Light gray background
     padding-top: 120px; // Adjusted padding to add more space between navbar and form
   
     .content {
@@ -13,7 +12,7 @@
       background-color: #ffffff; // White background for the form box
       border-radius: 12px; // Rounded corners for the box
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); // Shadow to create depth
-      margin-top: 50px;
+  
       // Ensure the form is responsive on smaller screens
       @media (max-width: 768px) {
         width: 95%; // Slightly adjust for smaller screens

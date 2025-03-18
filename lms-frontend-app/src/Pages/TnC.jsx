@@ -1,43 +1,20 @@
-import React, { useEffect, useState } from "react";
-////import OwnerSidebar from "../../Components/SidebarOwner";  // Sidebar for the owner portal
-//import "../../Styles/Owner/OwnerListLibraries.scss";  // SCSS file for styling
+import React from "react";
+import "../Styles/AboutsUsandTNC.scss";
 
-function ListLibraries() {
-  const [libraries, setLibraries] = useState([]);
-
-  useEffect(() => {
-    // Fetch libraries from the backend
-    fetch("http://localhost:8080/libraries") // Assuming the backend is running on localhost:5000
-      .then(response => response.json())
-      .then(data => {
-        setLibraries(data.libraries); // The response should only contain ID and Name
-      })
-      .catch(error => {
-        console.error("Error fetching libraries:", error);
-      });
-  }, []);
-
+const TermsAndConditions = () => {
   return (
-    <div className="owner-library-container">
-     
-      <div className="library-content">
-        <h2>Library List</h2>
-        {libraries.length === 0 ? (
-          <p>No libraries found.</p>
-        ) : (
-          <div className="library-list">
-            {libraries.map((library) => (
-              <div className="library-card" key={library.ID}>
-                <h3>{library.Name}</h3> {/* Display library name */}
-                <p>Library ID: {library.ID}</p> {/* Display library ID */}
-
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+    <div className="abc-container">
+      <h1>Terms and Conditions</h1>
+      <p>By using our Library Management System, you agree to the following terms and conditions:</p>
+      <ul>
+        <li>All books must be returned within the due date.</li>
+        <li>Late returns may incur a penalty.</li>
+        <li>Library members must maintain the books in good condition.</li>
+        <li>Any damage or loss of books must be reported immediately.</li>
+        <li>The library reserves the right to suspend or terminate access for violations.</li>
+      </ul>
     </div>
   );
-}
+};
 
-export default ListLibraries;
+export default TermsAndConditions;

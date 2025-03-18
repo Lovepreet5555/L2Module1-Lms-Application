@@ -36,6 +36,7 @@ import './App.scss';
 
 function App() {
   return (
+    <div className="App">
     <BrowserRouter>
       <NavBar />
       <Routes>
@@ -75,7 +76,7 @@ function App() {
         <Route path="/Admin/AdminRemoveBook" element={<AdminRemoveBook />} />
         <Route path="/Admin/AdminIssue" element={<AdminIssue />} />
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter></div>
   );
 }
 

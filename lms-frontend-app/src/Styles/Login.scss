@@ -9,9 +9,10 @@ html, body {
 body {
   display: flex;
   flex-direction: column; /* Keeps navbar at the top and content below */
-  background-color: #f4f4f4;
   font-family: Arial, sans-serif;
-  min-height: 100vh;      /* Ensure body takes up full height */
+  min-height: 100vh;   
+  background: url("../Assets/image.png") no-repeat;
+ background-size: cover;   /* Ensure body takes up full height */
 }
 
 /* Styling for the navbar */
@@ -104,3 +105,4 @@ button:hover {
   padding: 0 20px;         /* Add horizontal padding */
   margin-top: 70px;        /* Push content below the navbar (70px for navbar height) */
 }
+

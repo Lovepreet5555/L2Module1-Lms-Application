@@ -45,3 +45,13 @@
     background-color: #555;
   }
   
+
+  .App {
+    //text-align: center;
+   // background: url("../Assets/image.png") no-repeat;
+   // background-size: cover;
+    background-image: url("../Assets/images.png"); // Adjust path as needed
+    background-size: cover;  // Ensures the image covers the entire div
+    background-position: center;  // Centers the image
+    background-repeat: no-repeat;  // Prevents image repetition
+  }

@@ -1,10 +1,7 @@
 .admin-issue-container {
     display: flex;
-    justify-content: center; // Center the content horizontally
-    align-items: flex-start; // Align content at the top
-    min-height: 100vh; // Take up at least the entire height of the screen
-    background-color: #f1f1f1; // Light background color for the page
-    padding-top: 70px; // Add space to start below the navbar
+    justify-content: justify; // Center the content horizontally
+   
   
     .content {
       width: 85%; // Increase the width of the content area for more space
