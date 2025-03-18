@@ -2,6 +2,11 @@ import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import NavBar from "../Components/Navbar.jsx";
 import LoginPage from "../Pages/Login.jsx";  
 import SignUpPage from "../Pages/Signup.jsx";  
+
+import TnC from "../Pages/TnC.jsx";  
+import AboutUs from "../Pages/AboutUs.jsx";
+import ListLibraries from "../Pages/ListLibraries.jsx"; 
+
 import UserPortal from "../Pages/User/UserPortal.jsx";  // Import User Portal
 import OwnerPortal from "../Pages/Owner/OwnerPortal.jsx"; // Import Owner Portal
 import AdminPortal from "../Pages/Admin/AdminPortal.jsx"; // Import Admin Portal
@@ -36,7 +41,10 @@ function App() {
       <Routes>
         {/* Home route */}
         <Route path="/" element={<Home />} />
-
+        <Route path="/TnC" element={<TnC />} />
+        <Route path="/AboutUs" element={<AboutUs />} />
+        <Route path="/ListLibraries" element={<ListLibraries />} />
+        
         {/* Auth routes */}
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/Signup" element={<SignUpPage />} />

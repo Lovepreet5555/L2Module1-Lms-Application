@@ -16,13 +16,13 @@ const Navbar = () => {
           <Link to="/">Home</Link> {/* Use Link for React Router */}
         </div>
         <div className="page-section">
-          <Link to="/libraries">Libraries</Link> {/* Add navigation for Libraries */}
+          <Link to="/ListLibraries">Libraries</Link> {/* Add navigation for Libraries */}
         </div>
         <div className="page-section">
-          <Link to="/about">About Us</Link> {/* Add navigation for About Us */}
+          <Link to="/AboutUs">About Us</Link> {/* Add navigation for About Us */}
         </div>
         <div className="page-section">
-          <Link to="/terms">T&C</Link> {/* Add navigation for T&C */}
+          <Link to="/TnC">T&C</Link> {/* Add navigation for T&C */}
         </div>
       </div>
     </nav>
