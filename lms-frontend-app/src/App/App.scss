@@ -5,16 +5,28 @@
     justify-content: center;
     align-items: center;
     height: 65vh;
+    
    
   }
   h1 {
     
-    font-size: 7rem; 
+    font-size: 9rem; 
+    color:rgb(250, 250, 250)
     
   }
   h2{
-    font-size: 4rem; 
+    font-size: 3rem; 
+    color:rgb(32, 30, 30)
   }
+
+  h5{
+    
+    font-size: 6rem; 
+    color:rgb(255, 255, 255)
+    
+  }
+ 
+
 
   .button-container {
     display: flex;

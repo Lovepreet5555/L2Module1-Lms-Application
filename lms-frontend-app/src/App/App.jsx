@@ -84,7 +84,8 @@ function App() {
 function Home() {
   return (
     <div className="home">
-      <h1>Welcome </h1>
+      <h1>Welcome</h1>
+      <h3>Click to Login or SignUp  </h3>
       <div className="button-container">
         <Link to="/Login">
           <button className="login-btn">Login</button>

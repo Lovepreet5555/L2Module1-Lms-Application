@@ -22,7 +22,7 @@ const AdminUpdateBook = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:8080/api/book/${book.isbn}`, book, {
+      const response = await axios.put(`http://localhost:8080/api/book/${book.isbn}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,  // Assuming token is saved in localStorage
         },
