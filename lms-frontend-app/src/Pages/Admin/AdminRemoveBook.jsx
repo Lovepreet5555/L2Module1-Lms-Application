@@ -1,45 +1,55 @@
 import React, { useState } from "react";
-import AdminSidebar from "../../Components/SidebarAdmin";  // Import the sidebar component
-import "../../Styles/Admin/AdminRemoveBook.scss"; 
+import AdminSidebar from "../../Components/SidebarAdmin"; // Import the sidebar
+import "../../Styles/Admin/Book.scss"; // Ensure correct SCSS path
 
 const AdminRemoveBook = () => {
   const [isbn, setIsbn] = useState("");
   const [libraryId, setLibraryId] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false); // Added loading state
 
   const handleRemoveBook = async (e) => {
     e.preventDefault();
-    setMessage("");  // Clear previous messages
-    setError("");    // Clear previous error
+    setMessage(""); // Clear previous messages
+    setError(""); // Clear previous errors
+    setLoading(true); // Set loading to true while request is processing
 
     try {
-      const response = await fetch(`/api/book/remove/${isbn}`, {
+      const response = await fetch(`http://localhost:8080/api/book/${isbn}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,  // Assuming you're storing token in localStorage
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify({ libraryid: libraryId }),
+        body: JSON.stringify({ libraryid: parseInt(libraryId) }),
       });
 
       const data = await response.json();
-      if (response.ok) {
-        setMessage(data.message);
-      } else {
-        setError(data.error);
+      setLoading(false); // Stop loading state
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to remove book.");
       }
+
+      setMessage(data.message);
+      setIsbn("");
+      setLibraryId("");
     } catch (err) {
-      setError("Failed to remove the book. Please try again later.");
+      setLoading(false);
+      setError(err.message);
     }
   };
 
   return (
-    <div className="admin-remove-book-container">
+    <div className="book-container">
       <AdminSidebar />
       <div className="content">
-        <h2>Remove Book from Library</h2>
-        
+        <h2>Remove a Book from Library</h2>
+
+        {error && <p className="error-message">{error}</p>}
+        {message && <p className="success-message">{message}</p>}
+
         <form onSubmit={handleRemoveBook}>
           <div className="form-group">
             <label htmlFor="isbn">Book ISBN:</label>
@@ -64,12 +74,12 @@ const AdminRemoveBook = () => {
               required
             />
           </div>
-
-          <button type="submit" className="rmv-btn">Remove Book</button>
+          <div className="submit-container">
+          <button type="submit" className="all-btn" disabled={loading}>
+            {loading ? "Removing..." : "Remove Book"}
+          </button>
+          </div>
         </form>
-
-        {message && <div className="success-message">{message}</div>}
-        {error && <div className="error-message">{error}</div>}
       </div>
     </div>
   );

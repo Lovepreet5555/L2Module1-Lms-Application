@@ -20,11 +20,10 @@ import OwnerRegisterOwner from "../Pages/Owner/OwnerRegisterOwner.jsx";
 
 import AdminDetails from '../Pages/Admin/AdminDetails.jsx';
 import AdminListRequests from '../Pages/Admin/AdminListRequests.jsx';
-import AdminAD from '../Pages/Admin/AdminAD.jsx';
 import AdminAddBook from '../Pages/Admin/AdminAddBook.jsx';
 import AdminUpdateBook from '../Pages/Admin/AdminUpdateBook.jsx';
 import AdminRemoveBook from '../Pages/Admin/AdminRemoveBook.jsx';
-import AdminIssue from '../Pages/Admin/AdminIssue.jsx';
+
 
 import UserDetails from '../Pages/User/UserDetails.jsx';
 import UserIssueBook from '../Pages/User/UserIssueBook.jsx';
@@ -70,11 +69,11 @@ function App() {
         <Route path="/Admin/AdminPortal" element={<AdminPortal />} />
         <Route path="/Admin/AdminDetails" element={<AdminDetails />} />
         <Route path="/Admin/AdminListRequests" element={<AdminListRequests />} />
-        <Route path="/Admin/AdminAD" element={<AdminAD />} />
+        {/*<Route path="/Admin/AdminAD" element={<AdminAD />} />*/}
         <Route path="/Admin/AdminAddBook" element={<AdminAddBook />} />
         <Route path="/Admin/AdminUpdateBook" element={<AdminUpdateBook />} />
         <Route path="/Admin/AdminRemoveBook" element={<AdminRemoveBook />} />
-        <Route path="/Admin/AdminIssue" element={<AdminIssue />} />
+        {/*<Route path="/Admin/AdminIssue" element={<AdminIssue />} />*/}
       </Routes>
     </BrowserRouter></div>
   );

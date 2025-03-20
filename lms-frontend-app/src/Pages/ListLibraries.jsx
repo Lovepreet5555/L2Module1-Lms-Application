@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 ////import OwnerSidebar from "../../Components/SidebarOwner";  // Sidebar for the owner portal
-import "../Styles/Owner/OwnerListLibraries.scss";  // SCSS file for styling
+import "../Styles/Owner/Owner.scss";  // SCSS file for styling
 
 function ListLibraries() {
   const [libraries, setLibraries] = useState([]);

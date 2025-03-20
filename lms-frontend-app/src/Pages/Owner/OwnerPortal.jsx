@@ -1,14 +1,14 @@
 import React from "react";
 import OwnerSidebar from "../../Components/SidebarOwner";  // Import the sidebar component
-import "../../Styles/Portal.scss"
+import "../../Styles/Owner/Owner.scss"; 
 
 const OwnerPortal = () => {
   return (
-    <div className="portal-container">
+    <div className="owner-container">
       <OwnerSidebar />
       <div className="content">
         {/* Content of your owner portal page */}
-        <h5>Welcome to the Owner Portal</h5>
+        <h2>Welcome to the Owner Portal</h2>
         {/* You can include specific components for Registering Owners, Admins, etc., here */}
       </div>
     </div>

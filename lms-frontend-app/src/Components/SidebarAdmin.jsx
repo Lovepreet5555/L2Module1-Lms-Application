@@ -31,11 +31,7 @@ const SidebarAdmin = () => {
             List Requests
           </Link>
         </li>
-        <li>
-          <Link to="/Admin/AdminAD" className="sidebar-link">
-            Approve/Disapprove Request
-          </Link>
-        </li>
+       
         <li>
           <Link to="/Admin/AdminAddBook" className="sidebar-link">
             Add New Book
@@ -51,11 +47,7 @@ const SidebarAdmin = () => {
             Remove Book
           </Link>
         </li>
-        <li>
-          <Link to="/Admin/AdminIssue" className="sidebar-link">
-            Issue Book
-          </Link>
-        </li>
+        
 
         <li>
           {/* Logout Button */}

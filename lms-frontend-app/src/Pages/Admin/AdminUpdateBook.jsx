@@ -1,118 +1,156 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AdminSidebar from "../../Components/SidebarAdmin";
-import axios from "axios";
-import "../../Styles/Admin/AdminUpdateBook.scss"; 
+import "../../Styles/Admin/Book.scss";
 
 const AdminUpdateBook = () => {
-  const [book, setBook] = useState({
-    isbn: '',
-    title: '',
-    author: '',
-    publisher: '',
-    copies: 0,
-  });
-  
-  const [message, setMessage] = useState('');
+  const [isbn, setIsbn] = useState("");
+  const [title, setTitle] = useState("");
+  const [authors, setAuthors] = useState("");
+  const [publisher, setPublisher] = useState("");
+  const [version, setVersion] = useState("");
+  const [totalCopies, setTotalCopies] = useState("");
+  const [libraryID, setLibraryID] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setBook({ ...book, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
+  // Handle book update
+  const handleUpdate = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setErrorMessage("");
+    setSuccessMessage("");
+
+    if (!isbn) {
+      setErrorMessage("ISBN is required.");
+      setLoading(false);
+      return;
+    }
+
+    const updatedBook = {
+      Title: title,
+      Authors: authors,
+      Publisher: publisher,
+      Version: version,
+      TotalCopies: totalCopies ? parseInt(totalCopies) : undefined,
+      LibraryID: libraryID ? parseInt(libraryID) : undefined,
+    };
+
     try {
-      const response = await axios.put(`http://localhost:8080/api/book/${book.isbn}`, {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(`http://localhost:8080/api/book/${isbn}`, {
+        method: "PUT",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,  // Assuming token is saved in localStorage
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
+        body: JSON.stringify(updatedBook),
       });
-      setMessage(response.data.message || "Book updated successfully!");
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to update the book.");
+      }
+
+      setSuccessMessage("Book updated successfully.");
+      setIsbn("");
+      setTitle("");
+      setAuthors("");
+      setPublisher("");
+      setVersion("");
+      setTotalCopies("");
+      setLibraryID("");
     } catch (error) {
-      setMessage("Failed to update book.");
+      setErrorMessage(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  useEffect(() => {
-    // Fetch book details for the given ISBN if necessary
-    // Here we can use axios to fetch data and populate the state
-  }, []); // Add dependencies if you need to load data initially
-
   return (
-    <div className="admin-update-book">
+    <div className="book-container">
       <AdminSidebar />
       <div className="content">
-        <h2>Update Book Information</h2>
-        <form onSubmit={handleSubmit} className="update-book-form">
-          <div className="form-group">
-            <label htmlFor="isbn">ISBN</label>
-            <input
-              type="text"
-              id="isbn"
-              name="isbn"
-              value={book.isbn}
-              onChange={handleInputChange}
-              placeholder="Enter ISBN"
-              required
-            />
-          </div>
+        <h2>Update Book Details</h2>
 
-          <div className="form-group">
-            <label htmlFor="title">Title</label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              value={book.title}
-              onChange={handleInputChange}
-              placeholder="Enter book title"
-              required
-            />
-          </div>
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
+        {successMessage && <div className="success-message">{successMessage}</div>}
 
-          <div className="form-group">
-            <label htmlFor="author">Author</label>
-            <input
-              type="text"
-              id="author"
-              name="author"
-              value={book.author}
-              onChange={handleInputChange}
-              placeholder="Enter author's name"
-              required
-            />
+        <form onSubmit={handleUpdate}>
+          <div className="form-container">
+            <div className="form-group">
+              <label htmlFor="isbn">ISBN (Required):</label>
+              <input
+                type="text"
+                id="isbn"
+                value={isbn}
+                onChange={(e) => setIsbn(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="title">Title:</label>
+              <input
+                type="text"
+                id="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="authors">Authors:</label>
+              <input
+                type="text"
+                id="authors"
+                value={authors}
+                onChange={(e) => setAuthors(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="publisher">Publisher:</label>
+              <input
+                type="text"
+                id="publisher"
+                value={publisher}
+                onChange={(e) => setPublisher(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="version">Version:</label>
+              <input
+                type="text"
+                id="version"
+                value={version}
+                onChange={(e) => setVersion(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="totalCopies">Total Copies:</label>
+              <input
+                type="number"
+                id="totalCopies"
+                value={totalCopies}
+                onChange={(e) => setTotalCopies(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="libraryID">Library ID:</label>
+              <input
+                type="number"
+                id="libraryID"
+                value={libraryID}
+                onChange={(e) => setLibraryID(e.target.value)}
+              />
+            </div>
+            <div className="submit-container">
+              <button type="submit" className="all-btn" disabled={loading}>
+                {loading ? "Updating..." : "Update Book"}
+              </button>
+            </div>
           </div>
-
-          <div className="form-group">
-            <label htmlFor="publisher">Publisher</label>
-            <input
-              type="text"
-              id="publisher"
-              name="publisher"
-              value={book.publisher}
-              onChange={handleInputChange}
-              placeholder="Enter publisher name"
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="copies">Copies</label>
-            <input
-              type="number"
-              id="copies"
-              name="copies"
-              value={book.copies}
-              onChange={handleInputChange}
-              placeholder="Enter number of copies"
-              required
-            />
-          </div>
-
-          <button type="submit" className="upd-btn">Update Book</button>
         </form>
-
-        {message && <div className="message">{message}</div>}
       </div>
     </div>
   );

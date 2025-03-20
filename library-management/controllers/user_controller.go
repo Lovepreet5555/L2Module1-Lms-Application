@@ -67,20 +67,28 @@ func SearchBooks(db *gorm.DB) gin.HandlerFunc {
 				"library_id":       book.LibraryID,
 			}
 
+			// Check if the book is unavailable (no copies left)
 			if book.AvailableCopies == 0 {
 				var nextAvailableDate time.Time
 				var issue models.IssueRegistry
 
+				// Check if there is an outstanding issue with this book
 				if err := db.Where("isbn = ? AND return_date IS NULL", book.ISBN).
 					Order("expected_return_date ASC").
 					First(&issue).Error; err == nil {
+					// If there is an issue, get the next expected return date
 					nextAvailableDate = time.Unix(issue.ExpectedReturnDate, 0)
 					bookData["next_available_date"] = nextAvailableDate.Format("2006-01-02 15:04:05")
 				} else {
+					// If no issue found, the next available date is unknown
 					bookData["next_available_date"] = "Unknown"
 				}
+			} else {
+				// If available, do not show the next available date
+				bookData["next_available_date"] = "Available"
 			}
 
+			// Append the book data to the response
 			response = append(response, bookData)
 		}
 

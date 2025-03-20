@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import "../../Styles/Details.scss";
+import "../../Styles/Admin/Book.scss";
 import AdminSidebar from "../../Components/SidebarAdmin.jsx"; 
 
 function AdminDetails() {
@@ -30,10 +30,11 @@ function AdminDetails() {
   }
 
   return (
-    <div className="details-container">
+    <div className="book-container">
       <AdminSidebar />
+      <div className="content">
       <h2>Admin Details</h2>
-
+      
       {/* Display Admin's Basic Details */}
       <div className="detail">
         <strong>ID:</strong> {adminDetails.ID}
@@ -64,6 +65,7 @@ function AdminDetails() {
       ) : (
         <div>No libraries found</div>
       )}
+    </div>
     </div>
   );
 }

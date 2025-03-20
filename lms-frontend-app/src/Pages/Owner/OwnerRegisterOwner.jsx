@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import OwnerSidebar from "../../Components/SidebarOwner";  // Sidebar for the owner portal
-import "../../Styles/Owner/OwnerRegister.scss";  // SCSS file for styling
+import "../../Styles/Owner/Owner.scss";   // SCSS file for styling
 
 function OwnerRegisterOwner() {
   const [name, setName] = useState("");
@@ -60,9 +60,9 @@ function OwnerRegisterOwner() {
   };
 
   return (
-    <div className="owner-register-container">
+    <div className="owner-container">
       <OwnerSidebar />
-      <div className="register-content">
+      <div className="content">
         <h2>Register New Owner</h2>
 
         {/* Display success or error messages */}

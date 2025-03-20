@@ -46,6 +46,7 @@ func ListIssueRequests(db *gorm.DB) gin.HandlerFunc {
 				"book_id":       request.BookID,
 				"user_id":       request.ReaderID,
 				"request_type":  request.RequestType,
+				"status":        request.Status, // ✅ New field
 				"request_date":  formatUnixTime(&request.RequestDate),
 				"approval_date": formatUnixTime(request.ApprovalDate),
 				"approver_id":   request.ApproverID,
@@ -84,8 +85,8 @@ func ApproveIssue(db *gorm.DB) gin.HandlerFunc {
 			return
 		}
 
-		if request.ApprovalDate != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Request is already approved"})
+		if request.Status != "Pending" {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Request is already processed"})
 			return
 		}
 
@@ -98,13 +99,14 @@ func ApproveIssue(db *gorm.DB) gin.HandlerFunc {
 		request.ApprovalDate = &now
 		request.ApproverID = new(uint)
 		*request.ApproverID = adminID.(uint)
+		request.Status = "Approved" // ✅ Update Status
 
 		if err := db.Save(&request).Error; err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not approve request"})
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"message": "Issue request approved"})
+		c.JSON(http.StatusOK, gin.H{"message": "Issue request approved", "status": request.Status})
 	}
 }
 
@@ -119,15 +121,23 @@ func DisapproveIssue(db *gorm.DB) gin.HandlerFunc {
 			return
 		}
 
-		if err := db.Delete(&request).Error; err != nil {
+		//if request.Status != "Pending" {
+		//	c.JSON(http.StatusBadRequest, gin.H{"error": "Request is already processed"})
+		//	return
+		//}
+
+		request.Status = "Disapproved" // ✅ Update Status instead of deleting
+
+		if err := db.Save(&request).Error; err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not disapprove request"})
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"message": "Issue request disapproved successfully"})
+		c.JSON(http.StatusOK, gin.H{"message": "Issue request disapproved", "status": request.Status})
 	}
 }
 
+// 📚 Issue a book to a user (Unchanged)
 func IssueBookToUser(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		isbn := c.Param("isbn")
@@ -184,6 +194,7 @@ func IssueBookToUser(db *gorm.DB) gin.HandlerFunc {
 	}
 }
 
+// Helper function to format timestamps
 func formatUnixTime(timestamp *int64) string {
 	if timestamp == nil || *timestamp == 0 {
 		return "N/A"

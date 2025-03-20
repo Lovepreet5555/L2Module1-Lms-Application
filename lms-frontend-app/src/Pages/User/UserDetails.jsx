@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import "../../Styles/Details.scss";
+import "../../Styles/User/User.scss";
 import UserSidebar from "../../Components/SidebarUser.jsx"; 
 
 function UserDetails() {
@@ -30,8 +30,9 @@ function UserDetails() {
   }
 
   return (
-    <div className="details-container">
+    <div className="user-container">
       <UserSidebar />
+      <div className="content">
       <h2>User Details</h2>
 
       {/* Display Admin's Basic Details */}
@@ -64,6 +65,7 @@ function UserDetails() {
       ) : (
         <div>No libraries found</div>
       )}
+    </div>
     </div>
   );
 }

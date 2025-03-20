@@ -12,4 +12,5 @@ type RequestEvent struct {
 	ApprovalDate *int64 `gorm:"default:null"` // Default -1 Not yet approved
 	ApproverID   *uint  `gorm:"default:null"` // Default 0 Not yet approved
 	RequestType  string `gorm:"type:varchar(50);not null;check:request_type IN ('issue', 'return')"`
+	Status       string `gorm:"default:Pending"`
 }

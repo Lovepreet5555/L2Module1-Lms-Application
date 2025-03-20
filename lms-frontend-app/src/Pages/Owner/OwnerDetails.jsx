@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import OwnerSidebar from "../../Components/SidebarOwner.jsx";  // Sidebar for the owner portal
-import "../../Styles/Details.scss";  // Add CSS for styling the details
+import "../../Styles/Owner/Owner.scss";  // Add CSS for styling the details
 
 const OwnerDetails = () => {
   const [ownerDetails, setOwnerDetails] = useState(null);
@@ -15,8 +15,9 @@ const OwnerDetails = () => {
   }
 
   return (
-    <div className="details-container">
+    <div className="owner-container">
       <OwnerSidebar />
+      <div className="content">
       <h2>Owner Details</h2>
       <div className="detail">
           <strong>ID:</strong> {ownerDetails.ID}
@@ -34,6 +35,7 @@ const OwnerDetails = () => {
       <div className="detail">
           <strong>Role:</strong> {ownerDetails.Role}
         </div>
+    </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import OwnerSidebar from "../../Components/SidebarOwner"; // Sidebar for the owner portal
-import "../../Styles/Owner/OwnerAddLibraries.scss"; // SCSS file for styling
+import "../../Styles/Owner/Owner.scss"; // SCSS file for styling
 
 function OwnerAddLibraries() {
   const [libraryName, setLibraryName] = useState("");
@@ -51,16 +51,16 @@ function OwnerAddLibraries() {
   };
 
   return (
-    <div className="owner-add-library-container">
+    <div className="owner-container">
       <OwnerSidebar />
-      <div className="add-library-content">
+      <div className="content">
         <h2>Add New Library</h2>
 
         {/* Display success or error messages */}
         {message && <p className="success-message">{message}</p>}
         {error && <p className="error-message">{error}</p>}
 
-        <form onSubmit={handleSubmit} className="add-library-form">
+        <form onSubmit={handleSubmit} className="register-form">
           <div className="form-group">
             <label htmlFor="libraryName">Library Name</label>
             <input
