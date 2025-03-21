@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import "../../Styles/User/User.scss";
+import "../../Styles/User/UserIssueBook.scss"
 import UserSidebar from "../../Components/SidebarUser.jsx"; 
 
 function UserDetails() {
@@ -7,16 +7,16 @@ function UserDetails() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetching Admin Details from LocalStorage
+    
     const details = JSON.parse(localStorage.getItem('userDetails'));
 
     if (!details) {
       console.error('Admin details not found in localStorage');
-      return;  // Stop execution if admin details are missing
+      return; 
     }
 
     setUserDetails(details);
-    setLoading(false);  // No need to wait for API, we can load immediately
+    setLoading(false);  // No need to wait for API we can load immediately
   }, []);
 
   // Loading State
@@ -35,7 +35,6 @@ function UserDetails() {
       <div className="content">
       <h2>User Details</h2>
 
-      {/* Display Admin's Basic Details */}
       <div className="detail">
         <strong>ID:</strong> {userDetails.ID}
       </div>
@@ -51,14 +50,13 @@ function UserDetails() {
       <div className="detail">
         <strong>Role:</strong> {userDetails.Role}
       </div>
-
-      {/* Display Libraries Managed by Admin */}
+      
       {userDetails.Libraries && userDetails.Libraries.length > 0 ? (
         <div className="detail">
           <h3>User Libraries</h3>
           <ul>
             {userDetails.Libraries.map((library, index) => (
-              <li key={index}>{library.Name}</li>  
+              <li key={index}><strong>ID:</strong>{library.ID}<strong>  Name:</strong>{library.Name}</li>  
             ))}
           </ul>
         </div>

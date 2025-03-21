@@ -1,54 +1,39 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";  // Import useNavigate from react-router-dom
-import "./Sidebar.scss";  // Make sure to create this CSS file for styling
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./Sidebar.scss";
 
 const SidebarUser = () => {
-  const navigate = useNavigate();  // Initialize navigate function
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
-  // Logout handler
   const handleLogout = () => {
-    // Clear session data, tokens, etc.
-    localStorage.removeItem('userToken');
+    localStorage.removeItem("userToken");
     sessionStorage.clear();
     document.cookie = "userToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-
-    // Redirect to home page
-    navigate("/");  // Redirect to home page after logging out
+    navigate("/");
   };
 
   return (
-    <div className="sidebar">
-      <h3 className="sidebar-title">User Portal</h3>
-      <ul className="sidebar-links">
-        <li>
-          <Link to="/User/UserDetails" className="sidebar-link">
-            User Details
-          </Link>
-        </li>
-        <li>
-          <Link to="/User/UserSearchBook" className="sidebar-link">
-            Search For a Book
-          </Link>
-        </li>
-        <li>
-          <Link to="/User/UserIssueBook" className="sidebar-link">
-            Issue a Book
-          </Link>
-        </li>
-        <li>
-          <Link to="/User/UserStatusIssue" className="sidebar-link">
-            View Status
-          </Link>
-        </li>
+    <>
+      {/* Floating toggle button for small screens */}
+      <button className="sidebar-toggle-floating" onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? "⟨" : "⟩"}
+      </button>
 
-        {/* Logout Button */}
-        <li>
-          <button onClick={handleLogout} className="sidebar-link logout-btn">
-            Logout
-          </button>
-        </li>
-      </ul>
-    </div>
+      <div className={`sidebar ${isOpen ? "active" : ""}`}>
+        <div className="sidebar-header">
+          <h3 className="sidebar-title">User Portal</h3>
+        </div>
+
+        <ul className="sidebar-links">
+          <li><Link to="/User/UserDetails" className="sidebar-link">User Details</Link></li>
+          <li><Link to="/User/UserSearchBook" className="sidebar-link">Search For a Book</Link></li>
+          <li><Link to="/User/UserIssueBook" className="sidebar-link">Request a Book</Link></li>
+          <li><Link to="/User/UserStatusIssue" className="sidebar-link">View Status</Link></li>
+          <li><button onClick={handleLogout} className="sidebar-link logout-btn">Logout</button></li>
+        </ul>
+      </div>
+    </>
   );
 };
 

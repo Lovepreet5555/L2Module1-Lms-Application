@@ -1,60 +1,40 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";  // Import useNavigate from react-router-dom
-import "./Sidebar.scss";  // Make sure to create this CSS file for styling
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./Sidebar.scss";
 
 const SidebarOwner = () => {
-  const navigate = useNavigate();  // Initialize navigate function
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
-  // Logout handler
   const handleLogout = () => {
-    // Clear session data, tokens, etc.
-    localStorage.removeItem('userToken');
+    localStorage.removeItem("userToken");
     sessionStorage.clear();
     document.cookie = "userToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-
-    // Redirect to home page
-    navigate("/");  // Redirect to home page after logging out
+    navigate("/");
   };
 
   return (
-    <div className="sidebar">
-      <h3 className="sidebar-title">Owner Portal</h3>
-      <ul className="sidebar-links">
-        <li>
-          <Link to="/Owner/OwnerDetails" className="sidebar-link">
-            Owner Details
-          </Link>
-        </li>
-        <li>
-          <Link to="/Owner/OwnerRegisterOwner" className="sidebar-link">
-            Register New Owner
-          </Link>
-        </li>
-        <li>
-          <Link to="/Owner/OwnerRegisterAdmin" className="sidebar-link">
-            Register New Admin
-          </Link>
-        </li>
-        <li>
-          <Link to="/Owner/OwnerAddLibraries" className="sidebar-link">
-            Add New Library
-          </Link>
-        </li>
-        <li>
-          <Link to="/Owner/OwnerListLibraries" className="sidebar-link">
-            List Libraries
-          </Link>
-        </li>
-        
+    <>
+      {/* Floating toggle button for small screens */}
+      <button className="sidebar-toggle-floating" onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? "⟨" : "⟩"}
+      </button>
 
-        {/* Logout Button */}
-        <li>
-          <button onClick={handleLogout} className="sidebar-link logout-btn">
-            Logout
-          </button>
-        </li>
-      </ul>
-    </div>
+      <div className={`sidebar ${isOpen ? "active" : ""}`}>
+        <div className="sidebar-header">
+          <h3 className="sidebar-title">Owner Portal</h3>
+        </div>
+
+        <ul className="sidebar-links">
+          <li><Link to="/Owner/OwnerDetails" className="sidebar-link">Owner Details</Link></li>
+          <li><Link to="/Owner/OwnerRegisterOwner" className="sidebar-link">Register New Owner</Link></li>
+          <li><Link to="/Owner/OwnerRegisterAdmin" className="sidebar-link">Register New Admin</Link></li>
+          <li><Link to="/Owner/OwnerAddLibraries" className="sidebar-link">Add New Library</Link></li>
+          <li><Link to="/Owner/OwnerListLibraries" className="sidebar-link">List Libraries</Link></li>
+          <li><button onClick={handleLogout} className="sidebar-link logout-btn">Logout</button></li>
+        </ul>
+      </div>
+    </>
   );
 };
 

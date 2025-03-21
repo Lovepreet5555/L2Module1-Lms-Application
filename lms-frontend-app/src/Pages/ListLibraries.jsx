@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
-////import OwnerSidebar from "../../Components/SidebarOwner";  // Sidebar for the owner portal
-import "../Styles/Owner/Owner.scss";  // SCSS file for styling
+import "../Styles/Owner/Owner.scss";  
 
 function ListLibraries() {
   const [libraries, setLibraries] = useState([]);
 
   useEffect(() => {
-    // Fetch libraries from the backend
-    fetch("http://localhost:8080/libraries") // Assuming the backend is running on localhost:5000
+    
+    fetch("http://localhost:8080/libraries") 
       .then(response => response.json())
       .then(data => {
-        setLibraries(data.libraries); // The response should only contain ID and Name
+        setLibraries(data.libraries); 
       })
       .catch(error => {
         console.error("Error fetching libraries:", error);
@@ -18,9 +17,8 @@ function ListLibraries() {
   }, []);
 
   return (
-    <div className="owner-library-container">
-     
-      <div className="library-content">
+    <div className="owners-container">
+      <div className="content">
         <h2>Library List</h2>
         {libraries.length === 0 ? (
           <p>No libraries found.</p>

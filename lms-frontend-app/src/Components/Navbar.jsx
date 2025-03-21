@@ -1,8 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';  // Import Link from react-router-dom for routing
+import React, { useState } from "react";
+import { Link } from "react-router-dom"; 
 import "./Navbar.scss";
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <nav className="navbar">
       <div className="site-info">
@@ -11,18 +13,23 @@ const Navbar = () => {
           <h4>Library Management System</h4>
         </div>
       </div>
-      <div className="page-sections">
+
+      <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+        ☰
+      </div>
+
+      <div className={`page-sections ${menuOpen ? "open" : ""}`}>
         <div className="page-section">
-          <Link to="/">Home</Link> {/* Use Link for React Router */}
+          <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
         </div>
         <div className="page-section">
-          <Link to="/ListLibraries">Libraries</Link> {/* Add navigation for Libraries */}
+          <Link to="/ListLibraries" onClick={() => setMenuOpen(false)}>Libraries</Link>
         </div>
         <div className="page-section">
-          <Link to="/AboutUs">About Us</Link> {/* Add navigation for About Us */}
+          <Link to="/AboutUs" onClick={() => setMenuOpen(false)}>About Us</Link>
         </div>
         <div className="page-section">
-          <Link to="/TnC">T&C</Link> {/* Add navigation for T&C */}
+          <Link to="/TnC" onClick={() => setMenuOpen(false)}>T&C</Link>
         </div>
       </div>
     </nav>

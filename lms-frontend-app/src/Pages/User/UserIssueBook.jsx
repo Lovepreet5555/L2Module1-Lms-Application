@@ -43,7 +43,7 @@ const UserIssueBook = () => {
   };
 
   return (
-    <div className="user-issue-container">
+    <div className="user-container">
       <UserSidebar />
       <div className="content">
         <h2>Request a Book</h2>

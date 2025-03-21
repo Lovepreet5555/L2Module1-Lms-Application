@@ -1,6 +1,6 @@
 import React from "react";
 import UserSidebar from "../../Components/SidebarUser";  // Import the sidebar component
-import "../../Styles/User/User.scss"
+import "../../Styles/User/UserIssueBook.scss"
 
 const UserPortal = () => {
   return (

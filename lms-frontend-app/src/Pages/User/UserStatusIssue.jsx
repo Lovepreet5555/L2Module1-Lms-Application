@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
-import UserSidebar from "../../Components/SidebarUser";  // Import the sidebar component
-import axios from "axios"; // Assuming you're using axios for API calls
+import UserSidebar from "../../Components/SidebarUser"; 
+import axios from "axios"; 
 import "../../Styles/User/UserStatusIssue.scss"
 
 const UserStatusIssue = () => {
-  const [statusData, setStatusData] = useState(null);
+  const [requests, setRequests] = useState([]); 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
-  // Fetch the status of the book issue request when the component is mounted
+  
   useEffect(() => {
     const fetchStatus = async () => {
-      const token = localStorage.getItem("token"); // Assuming the token is saved in localStorage
+      const token = localStorage.getItem("token");
 
       if (!token) {
         setError("No token found. Please log in again.");
@@ -21,22 +21,26 @@ const UserStatusIssue = () => {
 
       try {
         const response = await axios.get("http://localhost:8080/api/issue/status", {
-          headers: {
-            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-          },
+          headers: { Authorization: `Bearer ${token}` },
         });
-        setStatusData(response.data); // Set status data when the response is successful
-        setError(""); // Clear any existing error
+
+        setRequests(response.data.requests || []); //Store the array of requests
+        setError("");
       } catch (err) {
-        setStatusData(null); // Clear status data if there's an error
-        setError(err.response?.data?.error || "Unable to fetch issue status"); // Display error message
+        setRequests([]); //Ensure requests are cleared on error
+        setError(err.response?.data?.error || "Unable to fetch issue status");
       } finally {
-        setLoading(false); // Set loading to false after the fetch is complete
+        setLoading(false);
       }
     };
 
-    fetchStatus(); // Call the fetch function on component mount
-  }, []); // Empty dependency array to ensure it runs only once when the component is mounted
+    fetchStatus();
+  }, []); // Empty dependency array to ensure it runs only once on mount
+
+  const formatDate = (timestamp) => {
+    if (!timestamp || isNaN(timestamp)) return "N/A";
+    return new Date(timestamp * 1000).toLocaleString();
+  };
 
   return (
     <div className="status-issue-container">
@@ -49,24 +53,24 @@ const UserStatusIssue = () => {
             <div className="spinner"></div>
             <p>Loading...</p>
           </div>
+        ) : error ? (
+          <p className="error-message">{error}</p> 
+        ) : requests.length === 0 ? (
+          <p className="no-status">No requests found.</p>
         ) : (
           <div className="status-section">
-            {statusData ? (
-              <div className="status-details">
-                <p><strong>Request ID:</strong> {statusData.request_id}</p>
-                <p><strong>Book ID:</strong> {statusData.book_id}</p>
-                <p><strong>Library ID:</strong> {statusData.library_id}</p>
-                <p><strong>Request Date:</strong> {new Date(statusData.request_date * 1000).toLocaleString()}</p>
-                <p><strong>Status:</strong> {statusData.status}</p>
-                {statusData.approval_date && (
-                  <p><strong>Approval Date:</strong> {new Date(statusData.approval_date * 1000).toLocaleString()}</p>
+            {requests.map((request) => (
+              <div key={request.request_id} className="status-details">
+                <p><strong>Request ID:</strong> {request.request_id}
+                <strong> Book ID:</strong> {request.book_id}
+                <strong> Library ID:</strong> {request.library_id}
+                <strong> Request Date:</strong> {formatDate(request.request_date)}
+                <strong> Status:</strong> {request.status}</p>
+                {request.approval_date && (
+                  <p><strong> Approval Date:</strong> {formatDate(request.approval_date)}</p>
                 )}
               </div>
-            ) : (
-              <p className="no-status">No status found for this request.</p>
-            )}
-
-            {error && <p className="error-message">{error}</p>} {/* Show error message if there's any */}
+            ))}
           </div>
         )}
       </div>

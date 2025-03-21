@@ -15,7 +15,6 @@ import OwnerDetails from "../Pages/Owner/OwnerDetails.jsx";
 import OwnerRegisterAdmin from "../Pages/Owner/OwnerRegisterAdmin.jsx";
 import OwnerAddLibraries from "../Pages/Owner/OwnerAddLibraries.jsx";
 import OwnerListLibraries from "../Pages/Owner/OwnerListLibraries.jsx";
-//import OwnerListAdmins from "../Pages/Owner/OwnerListAdmins.jsx";
 import OwnerRegisterOwner from "../Pages/Owner/OwnerRegisterOwner.jsx";
 
 import AdminDetails from '../Pages/Admin/AdminDetails.jsx';
@@ -45,7 +44,7 @@ function App() {
         <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/ListLibraries" element={<ListLibraries />} />
         
-        {/* Auth routes */}
+        {/* login and signup routes */}
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/Signup" element={<SignUpPage />} />
 
@@ -62,18 +61,15 @@ function App() {
         <Route path="/Owner/OwnerRegisterAdmin" element={<OwnerRegisterAdmin />} />
         <Route path="/Owner/OwnerAddLibraries" element={<OwnerAddLibraries />} />
         <Route path="/Owner/OwnerListLibraries" element={<OwnerListLibraries />} />
-       { /*<Route path="/Owner/OwnerListAdmins " element={<OwnerListAdmins />} />*/}
         <Route path="/Owner/OwnerRegisterOwner" element={<OwnerRegisterOwner />} />
 
         {/* Admin Portal routes */}
         <Route path="/Admin/AdminPortal" element={<AdminPortal />} />
         <Route path="/Admin/AdminDetails" element={<AdminDetails />} />
         <Route path="/Admin/AdminListRequests" element={<AdminListRequests />} />
-        {/*<Route path="/Admin/AdminAD" element={<AdminAD />} />*/}
         <Route path="/Admin/AdminAddBook" element={<AdminAddBook />} />
         <Route path="/Admin/AdminUpdateBook" element={<AdminUpdateBook />} />
         <Route path="/Admin/AdminRemoveBook" element={<AdminRemoveBook />} />
-        {/*<Route path="/Admin/AdminIssue" element={<AdminIssue />} />*/}
       </Routes>
     </BrowserRouter></div>
   );

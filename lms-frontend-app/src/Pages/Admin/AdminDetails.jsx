@@ -58,7 +58,7 @@ function AdminDetails() {
           <h3>Libraries Managed by Admin</h3>
           <ul>
             {adminDetails.Libraries.map((library, index) => (
-              <li key={index}>{library.Name}</li>  
+              <li key={index}><strong>ID:</strong>{library.ID}<strong>  Name:</strong>{library.Name}</li>  
             ))}
           </ul>
         </div>

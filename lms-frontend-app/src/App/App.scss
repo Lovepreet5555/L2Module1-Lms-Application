@@ -1,12 +1,10 @@
-
 .home {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 65vh;
-    
-   
+       
   }
   h1 {
     
@@ -23,13 +21,10 @@
   }
 
   h5{
-    
     font-size: 6rem; 
     color:rgb(255, 255, 255)
     
   }
- 
-
 
   .button-container {
     display: flex;
@@ -62,11 +57,16 @@
   
 
   .App {
-    //text-align: center;
-   // background: url("../Assets/image.png") no-repeat;
-   // background-size: cover;
-    background-image: url("../Assets/images.png"); // Adjust path as needed
-    background-size: cover;  // Ensures the image covers the entire div
-    background-position: center;  // Centers the image
-    background-repeat: no-repeat;  // Prevents image repetition
+    background-image: url("../Assets/images.png"); 
+    background-size: cover;  
+    background-position: center;  
+    background-repeat: no-repeat;  
   }
+
+  @media (max-width: 768px) {
+    h1 {
+     font-size: 7rem; 
+     color:rgb(250, 250, 250)
+        }
+    }
+  
