@@ -107,7 +107,8 @@ func DisapproveIssue(db *gorm.DB) gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Request is already processed"})
 			return
 		}
-
+		now := time.Now().Unix()
+		request.ApprovalDate = &now
 		request.Status = "Disapproved" // ✅ Update Status instead of deleting
 
 		if err := db.Save(&request).Error; err != nil {

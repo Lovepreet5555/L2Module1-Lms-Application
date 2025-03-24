@@ -27,7 +27,7 @@ const SidebarUser = () => {
 
         <ul className="sidebar-links">
           <li><Link to="/User/UserDetails" className="sidebar-link">User Details</Link></li>
-          <li><Link to="/User/UserSearchBook" className="sidebar-link">Search For a Book</Link></li>
+          <li><Link to="/User/UserSearchBooks" className="sidebar-link">Search For a Book</Link></li>
           <li><Link to="/User/UserIssueBook" className="sidebar-link">Request a Book</Link></li>
           <li><Link to="/User/UserStatusIssue" className="sidebar-link">View Status</Link></li>
           <li><button onClick={handleLogout} className="sidebar-link logout-btn">Logout</button></li>

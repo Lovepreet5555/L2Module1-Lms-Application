@@ -27,7 +27,7 @@ function Signup() {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/api/user', {  // Updated endpoint
+      const response = await fetch('http://localhost:8080/api/user', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

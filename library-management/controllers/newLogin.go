@@ -24,7 +24,7 @@ func RegisterOwnerNew(db *gorm.DB) gin.HandlerFunc {
 		}
 
 		if err := db.Create(&input).Error; err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not create owner"})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not create owner, Check your Credentials are they Correct: Name-only alphabets; Contact length:10"})
 			return
 		}
 
@@ -63,7 +63,7 @@ func RegisterAdmin(db *gorm.DB) gin.HandlerFunc {
 		}
 
 		if err := db.Create(&admin).Error; err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not create admin"})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not create admin, Check your Credentials are they Correct: Name-only alphabets; Contact length:10"})
 			return
 		}
 
@@ -163,7 +163,7 @@ func RegisterUser(db *gorm.DB) gin.HandlerFunc {
 		}
 
 		if err := db.Create(&user).Error; err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not register user"})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not register user, Check your Credentials are they Correct: Name-only alphabets; Contact length:10"})
 			return
 		}
 

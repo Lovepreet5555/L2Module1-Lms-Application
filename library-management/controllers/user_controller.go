@@ -131,7 +131,7 @@ func RequestIssue(db *gorm.DB) gin.HandlerFunc {
 		}
 
 		var existingRequest models.RequestEvent
-		if err := db.Where("reader_id = ? AND book_id = ? AND library_id = ? AND approval_date IS NULL", userID, input.BookID, input.LibraryID).First(&existingRequest).Error; err == nil {
+		if err := db.Where("reader_id = ? AND book_id = ? AND library_id = ? AND approval_date IS NULL ", userID, input.BookID, input.LibraryID).First(&existingRequest).Error; err == nil {
 			c.JSON(http.StatusConflict, gin.H{"error": "You already have a pending request for this book in this library"})
 			return
 		}

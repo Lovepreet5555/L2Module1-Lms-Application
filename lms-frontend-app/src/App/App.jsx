@@ -27,7 +27,7 @@ import AdminRemoveBook from '../Pages/Admin/AdminRemoveBook.jsx';
 import UserDetails from '../Pages/User/UserDetails.jsx';
 import UserIssueBook from '../Pages/User/UserIssueBook.jsx';
 import UserStatusIssue from '../Pages/User/UserStatusIssue.jsx';
-import UserSearchBook from '../Pages/User/UserSearchBook.jsx';
+import UserSearchBooks from '../Pages/User/UserSearchBooks.jsx';
 
 import './App.scss'; 
 
@@ -53,7 +53,7 @@ function App() {
         <Route path="/User/UserDetails" element={<UserDetails />} />
         <Route path="/User/UserIssueBook" element={<UserIssueBook />} />
         <Route path="/User/UserStatusIssue" element={<UserStatusIssue />} />
-        <Route path="/User/UserSearchBook" element={<UserSearchBook />} />
+        <Route path="/User/UserSearchBooks" element={<UserSearchBooks />} />
 
         {/* Owner Portal routes */}
         <Route path="/Owner/OwnerPortal" element={<OwnerPortal />} />

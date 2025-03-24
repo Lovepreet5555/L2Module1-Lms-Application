@@ -67,7 +67,7 @@ const UserStatusIssue = () => {
                 <strong> Request Date:</strong> {formatDate(request.request_date)}
                 <strong> Status:</strong> {request.status}</p>
                 {request.approval_date && (
-                  <p><strong> Approval Date:</strong> {formatDate(request.approval_date)}</p>
+                  <p><strong> Admin Response Date:</strong> {formatDate(request.approval_date)}</p>
                 )}
               </div>
             ))}

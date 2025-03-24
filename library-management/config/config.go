@@ -15,7 +15,7 @@ var DB *gorm.DB
 func ConnectDatabase(isTest bool) (*gorm.DB, error) {
 	if isTest {
 		// Mock database for unit testing
-		return DB, nil 
+		return DB, nil
 	}
 
 	// Actual database connection for normal use
