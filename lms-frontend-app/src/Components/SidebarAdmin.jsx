@@ -15,7 +15,7 @@ const SidebarAdmin = () => {
 
   return (
     <>
-      {/* Floating toggle button for small screens */}
+     
       <button className="sidebar-toggle-floating" onClick={() => setIsOpen(!isOpen)}>
         {isOpen ? "⟨" : "⟩"}
       </button>

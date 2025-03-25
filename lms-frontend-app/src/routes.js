@@ -6,7 +6,6 @@ const Routes = () => (
   <Router>
     <Switch>
       <Route path="/" exact component={LoginPage} />
-      {/* Add other routes for Dashboard, Admin, etc. */}
     </Switch>
   </Router>
 );
